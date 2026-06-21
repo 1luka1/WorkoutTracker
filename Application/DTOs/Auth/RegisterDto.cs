@@ -4,23 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using Application.Constants;
 
 namespace Application.DTOs.Auth
 {
     public record RegisterDto (
 
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress(ErrorMessage = "Email address is invalid.")]
+        [Required(ErrorMessage = ErrorMessages.EmailRequired)]
+        [EmailAddress(ErrorMessage = ErrorMessages.InvalidEmail)]
         string Email,
         
-        [Required(ErrorMessage = "Password is required.")]
-        [MinLength(4, ErrorMessage = "Password must be at least 4 characters long")]
+        [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
+        [MinLength(4, ErrorMessage = ErrorMessages.PasswordLength)]
         string Password,
 
-        [Required(ErrorMessage = "First name is required.")]
+        [Required(ErrorMessage = ErrorMessages.FirstNameRequired)]
         string FirstName,
 
-        [Required(ErrorMessage = "Last name is required.")]
+        [Required(ErrorMessage = ErrorMessages.LastNameRequired)]
         string LastName
     );
     
