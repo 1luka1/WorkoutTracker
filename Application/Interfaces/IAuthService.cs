@@ -11,5 +11,6 @@ namespace Application.Interfaces
     public interface IAuthService
     {
         Task<Result<RegisterResponseDto>> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken = default);
+        Task<Result<LoginResponseDto>> LoginAsync(LoginDto dto, CancellationToken cancellationToken = default);
     }
 }
