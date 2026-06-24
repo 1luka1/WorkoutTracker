@@ -12,7 +12,6 @@ using Microsoft.Extensions.Logging;
 using Application.Constants;
 
 
-
 namespace Application.Services
 {
     public class AuthService : IAuthService
@@ -21,7 +20,8 @@ namespace Application.Services
         private readonly ILogger<AuthService> _logger;
         private readonly IJWTTokenGenerator _jwtTokenGenerator;
 
-        public AuthService(IUserRepository userRepository, ILogger<AuthService> logger, IJWTTokenGenerator jWTTokenGenerator) 
+        public AuthService(IUserRepository userRepository, ILogger<AuthService> logger,
+            IJWTTokenGenerator jWTTokenGenerator)
         {
             _userRepository = userRepository;
             _logger = logger;
@@ -29,7 +29,8 @@ namespace Application.Services
         }
 
 
-        public async Task<Result<RegisterResponseDto>> RegisterAsync(RegisterDto dto, CancellationToken cancellationToken = default)
+        public async Task<Result<RegisterResponseDto>> RegisterAsync(RegisterDto dto,
+            CancellationToken cancellationToken = default)
         {
             var existingUser = await _userRepository.GetByEmailAsync(dto.Email, cancellationToken);
             if (existingUser != null)
@@ -50,15 +51,18 @@ namespace Application.Services
             return Result<RegisterResponseDto>.Success(response);
         }
 
-        public async Task<Result<LoginResponseDto>> LoginAsync(LoginDto dto, CancellationToken cancellationToken = default)
+        public async Task<Result<LoginResponseDto>> LoginAsync(LoginDto dto,
+            CancellationToken cancellationToken = default)
         {
             var user = await _userRepository.GetByEmailAsync(dto.Email, cancellationToken);
-            if (user == null) {
+            if (user == null)
+            {
                 _logger.LogWarning("Login with email {Email} failed - user does not exist.", dto.Email);
                 return Result<LoginResponseDto>.Failure(ErrorMessages.InvalidEmailOrPassword);
             }
 
-            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash)) {
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
+            {
                 _logger.LogWarning("Login with email {Email} failed - wrong password.", dto.Email);
                 return Result<LoginResponseDto>.Failure(ErrorMessages.InvalidEmailOrPassword);
             }

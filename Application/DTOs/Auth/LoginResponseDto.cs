@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.Auth
 {
-    public record LoginResponseDto (
+    public record LoginResponseDto(
         string Token,
         int UserId,
         string Email
-
     );
 }

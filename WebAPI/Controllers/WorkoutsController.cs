@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Application.Constants;
 
 namespace WebAPI.Controllers
 {
@@ -15,7 +16,8 @@ namespace WebAPI.Controllers
         private readonly IWorkoutService _workoutService;
         private readonly ILogger<WorkoutsController> _logger;
 
-        public WorkoutsController(IWorkoutService workoutService, ILogger<WorkoutsController> logger) { 
+        public WorkoutsController(IWorkoutService workoutService, ILogger<WorkoutsController> logger)
+        {
             _workoutService = workoutService;
             _logger = logger;
         }
@@ -24,7 +26,7 @@ namespace WebAPI.Controllers
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userIdClaim))
-                throw new UnauthorizedAccessException("User ID not found in token.");
+                throw new UnauthorizedAccessException(ErrorMessages.UserIdNotFound);
             return int.Parse(userIdClaim);
         }
 
@@ -35,12 +37,23 @@ namespace WebAPI.Controllers
             var result = await _workoutService.AddAsync(dto, userId);
 
             if (result.IsFailure)
-                return BadRequest(new {error = result.ErrorMessage});
+                return BadRequest(new { error = result.ErrorMessage });
 
-            return CreatedAtAction(nameof(AddWorkout), new { id = result.Data.Id }, result.Data);
- 
+            return Ok(result.Data);
         }
-    
-    }
 
+        [HttpGet]
+        public async Task<IActionResult> GetProgress([FromQuery] int year, [FromQuery] int month)
+        {
+            if (year < 0 || month < 0 || month > 12)
+                return BadRequest(new { error = ErrorMessages.YearOrMonthInvalid });
+            var userId = GetUserId();
+            var result = await _workoutService.GetWeeklyProgressASync(userId, year, month);
+
+            if (result.IsFailure)
+                return BadRequest(new { error = result.ErrorMessage });
+
+            return Ok(result);
+        }
+    }
 }

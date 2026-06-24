@@ -10,6 +10,10 @@ namespace Application.Interfaces
 {
     public interface IWorkoutService
     {
-        Task<Result<WorkoutResponseDto>> AddAsync(CreateWorkoutDto dto, int userId, CancellationToken cancellationToken = default);
+        Task<Result<WorkoutResponseDto>> AddAsync(CreateWorkoutDto dto, int userId,
+            CancellationToken cancellationToken = default);
+
+        Task<Result<List<ProgressDto>>> GetWeeklyProgressASync(int userId, int year, int month,
+            CancellationToken cancellationToken = default);
     }
 }

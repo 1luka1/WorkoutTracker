@@ -5,34 +5,25 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Constants;
 
 namespace Application.DTOs.Workout
 {
-    public record CreateWorkoutDto (
-
-        [Required(ErrorMessage = "Exercise type is required.")]
-        [EnumDataType(typeof(ExerciseType), ErrorMessage = "Invalid exercise type.")]
+    public record CreateWorkoutDto(
+        [Required(ErrorMessage = ErrorMessages.ExerciseTypeRequired)]
+        [EnumDataType(typeof(ExerciseType), ErrorMessage = ErrorMessages.ExerciseTypeInvalid)]
         ExerciseType ExerciseType,
-
-        [Required(ErrorMessage = "Duration minutes is required.")]
-        [Range(1, int.MaxValue, ErrorMessage = "Duration minutes must be greater than 0.")]
+        [Required(ErrorMessage = ErrorMessages.DurationMinutesRequired)]
+        [Range(1, int.MaxValue, ErrorMessage = ErrorMessages.DurationMinutesInvalid)]
         int DurationMinutes,
-
-        [Range(1, int.MaxValue, ErrorMessage = "Calories burnt must be greater than 0.")]
+        [Range(1, int.MaxValue, ErrorMessage = ErrorMessages.CaloriesRange)]
         int CaloriesBurnt,
-
-        [Range(1, 10, ErrorMessage = "Weight intensity must be between 1 and 10.")]
+        [Range(1, 10, ErrorMessage = ErrorMessages.WeightIntensityRange)]
         int WeightIntensity,
-
-        [Range(1, 10, ErrorMessage = "Fatigue must be between 1 and 10.")]
+        [Range(1, 10, ErrorMessage = ErrorMessages.FatigueRange)]
         int Fatigue,
-
         string? Notes,
-
-        [Required(ErrorMessage = "Workout date and time is required.")]
+        [Required(ErrorMessage = ErrorMessages.WorkoutDateTimeRequired)]
         DateTime WorkoutDateTime
-
-
-        );
-    
+    );
 }

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.Workout
 {
-    public record WorkoutResponseDto (
-
+    public record WorkoutResponseDto(
         int Id,
         int UserId,
         ExerciseType ExerciseType,
@@ -17,8 +16,6 @@ namespace Application.DTOs.Workout
         int WeightIntensity,
         int Fatigue,
         string? Notes,
-        DateTime WorkoutDateTime   
-        
+        DateTime WorkoutDateTime
     );
-
 }

@@ -11,5 +11,8 @@ namespace Application.Interfaces
     {
         Task AddAsync(Workout workout, CancellationToken cancellationToken = default);
         Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default);
+
+        Task<List<Workout>> GetByUserAndMonthAsync(int userId, int year, int month,
+            CancellationToken cancellationToken = default);
     }
 }

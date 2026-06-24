@@ -11,7 +11,10 @@ namespace Infrastructure.Data
 {
     public class AppDbContext : DbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Workout> Workouts { get; set; }
 
@@ -42,10 +45,9 @@ namespace Infrastructure.Data
                 entity.Property(w => w.Notes).HasMaxLength(1000);
 
                 entity.HasOne(w => w.User)
-                      .WithMany()
-                      .HasForeignKey(w => w.UserId)
-                      .OnDelete(DeleteBehavior.Cascade);
-
+                    .WithMany()
+                    .HasForeignKey(w => w.UserId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
