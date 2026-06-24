@@ -14,7 +14,7 @@ namespace Infrastructure.Repositories
     {
         private readonly AppDbContext _context;
 
-        public UserRepository(AppDbContext context) 
+        public UserRepository(AppDbContext context)
         {
             _context = context;
         }
@@ -33,7 +33,6 @@ namespace Infrastructure.Repositories
         public async Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             return await _context.SaveChangesAsync(cancellationToken) > 0;
-
         }
     }
 }

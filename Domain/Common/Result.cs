@@ -13,7 +13,8 @@ namespace Domain.Common
         public string? ErrorMessage { get; }
         public bool IsFailure => !IsSuccess;
 
-        private Result(bool isSuccess, T? data, string? errorMessage) {
+        private Result(bool isSuccess, T? data, string? errorMessage)
+        {
             IsSuccess = isSuccess;
             Data = data;
             ErrorMessage = errorMessage;

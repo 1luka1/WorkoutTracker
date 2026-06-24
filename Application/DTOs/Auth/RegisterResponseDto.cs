@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.Auth
 {
-    public record RegisterResponseDto (
+    public record RegisterResponseDto(
         int UserId,
         string Email,
         string FirstName,

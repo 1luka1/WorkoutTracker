@@ -9,12 +9,10 @@ using System.Threading.Tasks;
 namespace Application.DTOs.Auth
 {
     public record LoginDto(
-       [Required(ErrorMessage = ErrorMessages.EmailRequired)]
-       [EmailAddress(ErrorMessage = ErrorMessages.InvalidEmail)]
-       string Email,
-
-       [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
-       string Password
-
+        [Required(ErrorMessage = ErrorMessages.EmailRequired)]
+        [EmailAddress(ErrorMessage = ErrorMessages.InvalidEmail)]
+        string Email,
+        [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
+        string Password
     );
 }

@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Application.Constants;
 
 namespace Infrastructure.Services
 {
@@ -23,9 +24,12 @@ namespace Infrastructure.Services
 
         public string GenerateToken(User user)
         {
-            var secret = _configuration["Jwt:Secret"] ?? throw new InvalidOperationException("JWT Secret is not configured.");
-            var issuer = _configuration["Jwt:Issuer"] ?? throw new InvalidOperationException("JWT Issuer is not configured.");
-            var audience = _configuration["Jwt:Audience"] ?? throw new InvalidOperationException("JWT Audience is not configured.");
+            var secret = _configuration["Jwt:Secret"] ??
+                         throw new InvalidOperationException(ErrorMessages.JwtSecretError);
+            var issuer = _configuration["Jwt:Issuer"] ??
+                         throw new InvalidOperationException(ErrorMessages.JwtIssuerError);
+            var audience = _configuration["Jwt:Audience"] ??
+                           throw new InvalidOperationException(ErrorMessages.JwtAudienceError);
             var expiryMinutes = double.Parse(_configuration["Jwt:ExpiryMinutes"] ?? "60");
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));

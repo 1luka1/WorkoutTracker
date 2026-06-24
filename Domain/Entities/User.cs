@@ -16,11 +16,13 @@ namespace Domain.Entities
         public string LastName { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
-        private User() { }
+        private User()
+        {
+        }
 
-        public User(string email, string passwordHash, string firstName, string lastName) { 
-
-            if (string.IsNullOrWhiteSpace(email)) 
+        public User(string email, string passwordHash, string firstName, string lastName)
+        {
+            if (string.IsNullOrWhiteSpace(email))
                 throw new ArgumentNullException("Email is required.", nameof(email));
             try
             {
@@ -31,7 +33,7 @@ namespace Domain.Entities
                 throw new ArgumentException("Email is not valid.", nameof(email));
             }
 
-            if(string.IsNullOrWhiteSpace(passwordHash))
+            if (string.IsNullOrWhiteSpace(passwordHash))
                 throw new ArgumentNullException("Password hash is required.", nameof(passwordHash));
 
             if (string.IsNullOrWhiteSpace(firstName))
