@@ -98,7 +98,7 @@ Start the API:
 
 ### 3. Frontend (Angular)
 
-Open a new terminal and navigate to the frontend folder:
+Open a new terminal in the root folder (`WorkoutTracker`):
 
 `cd workout-tracker-frontend`
 `npm install`
