@@ -1,0 +1,68 @@
+<div class="page-container">
+  <h2>Log Workout</h2>
+
+  <form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="exerciseType">Exercise Type</label>
+      <select id="exerciseType" formControlName="exerciseType">
+        <option *ngFor="let type of exerciseTypes" [value]="type.value">
+          {{ type.label }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="durationMinutes">Duration (minutes)</label>
+      <input id="durationMinutes" type="number" formControlName="durationMinutes" min="1" />
+      <div class="error" *ngIf="workoutForm.get('durationMinutes')?.touched && workoutForm.get('durationMinutes')?.invalid">
+        Duration must be at least 1 minute.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="caloriesBurnt">Calories Burnt</label>
+      <input id="caloriesBurnt" type="number" formControlName="caloriesBurnt" min="1" />
+      <div class="error" *ngIf="workoutForm.get('caloriesBurnt')?.touched && workoutForm.get('caloriesBurnt')?.invalid">
+        Calories burnt must be at least 1.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="weightIntensity">Workout Intensity (1-10)</label>
+      <input id="weightIntensity" type="number" formControlName="weightIntensity" min="1" max="10" />
+      <div class="error" *ngIf="workoutForm.get('weightIntensity')?.touched && workoutForm.get('weightIntensity')?.invalid">
+        Intensity must be between 1 and 10.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="fatigue">Fatigue (1-10)</label>
+      <input id="fatigue" type="number" formControlName="fatigue" min="1" max="10" />
+      <div class="error" *ngIf="workoutForm.get('fatigue')?.touched && workoutForm.get('fatigue')?.invalid">
+        Fatigue must be between 1 and 10.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Notes (optional)</label>
+      <textarea id="notes" formControlName="notes" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="workoutDateTime">Date &amp; Time</label>
+      <input id="workoutDateTime" type="datetime-local" formControlName="workoutDateTime" />
+      <div class="error" *ngIf="workoutForm.get('workoutDateTime')?.touched && workoutForm.get('workoutDateTime')?.invalid">
+        Date and time are required.
+      </div>
+    </div>
+
+    <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class="success" *ngIf="successMessage">{{ successMessage }}</div>
+
+    <button type="submit" [disabled]="isLoading">
+      {{ isLoading ? 'Saving...' : 'Save Workout' }}
+    </button>
+  </form>
+
+  <p><a routerLink="/home">Back to Home</a> | <a routerLink="/progress">View Progress</a></p>
+</div>
