@@ -1,0 +1,11 @@
+<div class="auth-container">
+  <h2>Welcome!</h2>
+  <p>Logged in as: {{ email }}</p>
+
+  <p>
+    <a routerLink="/workouts/new">Log Workout</a> |
+    <a routerLink="/progress">View Progress</a>
+  </p>
+
+  <button (click)="logout()">Logout</button>
+</div>
