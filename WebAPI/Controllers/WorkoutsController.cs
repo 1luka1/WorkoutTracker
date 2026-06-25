@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
             if (result.IsFailure)
                 return BadRequest(new { error = result.ErrorMessage });
 
-            return Ok(result);
+            return Ok(result.Data);
         }
     }
 }
