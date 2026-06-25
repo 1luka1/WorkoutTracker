@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 export interface RegisterRequest {
   email: string;
@@ -28,7 +29,7 @@ export interface LoginResponse {
   email: string;
 }
 
-const API_URL = 'https://localhost:7060/api/v1/auth';
+const API_URL = `${environment.apiUrl}/auth`;
 
 @Injectable({
   providedIn: 'root'

@@ -1,0 +1,38 @@
+<div class="page-container">
+  <h2>Monthly Progress</h2>
+
+  <div class="form-group">
+    <label for="month">Select Month</label>
+    <input id="month" type="month" [(ngModel)]="selectedMonth" />
+    <button type="button" (click)="onSearch()" [disabled]="isLoading">
+      {{ isLoading ? 'Loading...' : 'Show Progress' }}
+    </button>
+  </div>
+
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <table *ngIf="hasSearched && !isLoading && progress.length > 0">
+    <thead>
+      <tr>
+        <th>Week</th>
+        <th>Total Duration (min)</th>
+        <th>Workout Count</th>
+        <th>Avg. Intensity</th>
+        <th>Avg. Fatigue</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let week of progress">
+        <td>Week {{ week.weekNumber }}</td>
+        <td>{{ week.totalDuration }}</td>
+        <td>{{ week.workoutCount }}</td>
+        <td>{{ week.averageIntensity }}</td>
+        <td>{{ week.averageFatigue }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="hasSearched && !isLoading && progress.length === 0">No workouts found for this month.</p>
+
+  <p><a routerLink="/home">Back to Home</a> | <a routerLink="/workouts/new">Log Workout</a></p>
+</div>

@@ -1,5 +1,11 @@
 <div class="auth-container">
-  <h2>You have successfully logged in!</h2>
-  <p>You are signed in as: {{ email }}</p>
-  <button (click)="logout()">Sign out</button>
+  <h2>Welcome!</h2>
+  <p>Logged in as: {{ email }}</p>
+
+  <p>
+    <a routerLink="/workouts/new">Log Workout</a> |
+    <a routerLink="/progress">View Progress</a>
+  </p>
+
+  <button (click)="logout()">Logout</button>
 </div>
